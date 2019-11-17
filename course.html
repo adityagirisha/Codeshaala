@@ -42,8 +42,6 @@
         // alert(sessionStorage.getItem("course"));
         var user=sessionStorage.getItem("user");
         var lang=sessionStorage.getItem("course");
-        
-
         var payLoad ={'user':user,'course':lang};
         $.ajax({
                 type : 'POST',
@@ -67,7 +65,18 @@
                     document.getElementById("target").innerHTML=response;
                 }
         });
-        
+        var payLoad ={'user':user};      
+		setInterval(function() {
+			console.log(payLoad);
+			$.ajax({
+                type : 'POST',
+                url : '/api/v1/update_clock',
+                data : payLoad,
+                success: function(response){
+                    console.log("time!");
+                    }
+                });
+		}, 60 * 1000); 
 		function logout(){
 			sessionStorage.removeItem("user")
 			sessionStorage.removeItem("course")

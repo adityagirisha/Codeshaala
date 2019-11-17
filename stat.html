@@ -27,6 +27,27 @@
 	<!--DO NOT TOUCH-->
 
 	<script>
+			// document.getElementById("dis").disabled = true;
+			var user=sessionStorage.getItem("user");
+			var payLoad ={'user':user};
+			$.ajax({
+					type : 'POST',
+					url : '/api/v1/get_stats',
+					data : payLoad,
+					success: function(response){
+						console.log(response);
+						// document.getElementById("dis").disabled = false;
+						document.getElementById('ccounter').setAttribute("data-to", response.courses);
+						document.getElementById('qcounter').setAttribute("data-to", response.quizes);
+						document.getElementById('tcounter').setAttribute("data-to", response.time);
+						document.getElementById('scounter').setAttribute("data-to", response.score);
+					}
+			});
+
+			var i=100000;
+			while(i>0){
+			i--;
+			}
 			if(sessionStorage.getItem("user")==null){
 				window.location.assign("http://localhost:8081/index.html");
 			}
@@ -42,6 +63,20 @@
             }
 
             
+			
+			setInterval(function() {
+				console.log(payLoad);
+				$.ajax({
+					type : 'POST',
+					url : '/api/v1/update_clock',
+					data : payLoad,
+					success: function(response){
+						console.log("time!");
+						}
+					});
+			}, 60 * 1000); 
+
+			
 	</script>
 
 	</head>
@@ -74,34 +109,34 @@
                         <h2>The Stats.</h2>
                     </div>
                 </div>
-                <div class="row">
+                <div id="dis" class="row">
                     
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="fh5co-counter to-animate">
                             <i class="fh5co-counter-icon icon-code to-animate-2"></i>
-                            <span class="fh5co-counter-number js-counter" data-from="0" data-to="23" data-speed="5000" data-refresh-interval="50">2343409</span>
+                            <span id="ccounter" class="fh5co-counter-number js-counter" data-from="0" data-to="-1" data-speed="2000" data-refresh-interval="20">0</span>
                             <span class="fh5co-counter-label">Courses Enrolled</span>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="fh5co-counter to-animate">
                                 <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
-                                <span class="fh5co-counter-number js-counter" data-from="0" data-to="9" data-speed="5000" data-refresh-interval="50">89</span>
+                                <span id="qcounter" class="fh5co-counter-number js-counter" data-from="0" data-to="-1" data-speed="2000" data-refresh-interval="20">0</span>
                                 <span class="fh5co-counter-label">Quizes Taken</span>
                             </div>
                         </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="fh5co-counter to-animate">
                             <i class="fh5co-counter-icon icon-cup to-animate-2"></i>
-                            <span class="fh5co-counter-number js-counter" data-from="0" data-to="1302" data-speed="5000" data-refresh-interval="50">1302</span>
-                            <span class="fh5co-counter-label">Hours Spent</span>
+                            <span id="tcounter"class="fh5co-counter-number js-counter" data-from="0" data-to="-1" data-speed="2000" data-refresh-interval="20">0</span>
+                            <span class="fh5co-counter-label">Minutes Spent</span>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="fh5co-counter to-animate">
                             <i class="fh5co-counter-icon icon-people to-animate-2"></i>
-                            <span class="fh5co-counter-number js-counter" data-from="0" data-to="52087" data-speed="5000" data-refresh-interval="50">52</span>
-                            <span class="fh5co-counter-label">Ranking</span>
+                            <span id="scounter" class="fh5co-counter-number js-counter" data-from="0" data-to="-1" data-speed="2000" data-refresh-interval="20">0</span>
+                            <span class="fh5co-counter-label">Points</span>
                         </div>
                     </div>
                 </div>

@@ -39,7 +39,23 @@
 		function stat(){
                 // sessionStorage.removeItem("course")
                 window.location.assign("http://localhost:8081/stat.html");
-        }
+		}
+		
+
+		var user=sessionStorage.getItem("user");
+        var payLoad ={'user':user};
+        
+		setInterval(function() {
+			console.log(payLoad);
+			$.ajax({
+                type : 'POST',
+                url : '/api/v1/update_clock',
+                data : payLoad,
+                success: function(response){
+                    
+                    }
+                });
+		}, 60 * 1000); 
 	</script>
 	</head>
 	<body>
@@ -288,7 +304,7 @@
 					<div class="clearfix visible-sm-block"></div>
 	
 					<div class="col-md-4 col-sm-6 col-xxs-12">
-						<a href="http://localhost:8081/quiz.html" class="fh5co-project-item  to-animate">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('go')" class="fh5co-project-item  to-animate">
 							<img src="images/go.jpg" alt="Image" class="img-responsive">
 							<div class="fh5co-text">
 							<h2>Go</h2>
@@ -297,7 +313,7 @@
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-6 col-xxs-12">
-						<a href="http://localhost:8081/quiz.html" class="fh5co-project-item  to-animate">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('scala')" class="fh5co-project-item  to-animate">
 							<img src="images/scala.jpg" alt="Image" class="img-responsive">
 							<div class="fh5co-text">
 							<h2>Scala</h2>

@@ -34,7 +34,19 @@
             if(sessionStorage.getItem("quiz")==null){
 			window.location.assign("http://localhost:8081/dashboard.html");
             }
-
+            var user=sessionStorage.getItem("user");
+            var payLoad ={'user':user};
+            setInterval(function() {
+                console.log(payLoad);
+                $.ajax({
+                    type : 'POST',
+                    url : '/api/v1/update_clock',
+                    data : payLoad,
+                    success: function(response){
+                        console.log("time!");
+                        }
+                    });
+            }, 60 * 1000); 
             // alert(sessionStorage.getItem("quiz"));
             function logout(){
                 sessionStorage.removeItem("user")
@@ -129,7 +141,8 @@
                 
                 var lang=sessionStorage.getItem("quiz");
                 var payLoad ={'user':user,'quiz': lang,'score':score};
-                alert(payLoad)
+                // alert(payLoad)
+                
                 $.ajax({
                 type : 'POST',
                 url : '/api/v1/send_result',
@@ -203,6 +216,8 @@
                 <div class="row text-center">
                         <div id="frame" role="content"></div>
                 </div>
+
+                <br><br><br>
             </div>
         </section>
         <style type="text/css" media="all">
