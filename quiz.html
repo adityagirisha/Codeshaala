@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+
+	<title>CodeShaala</title>
+
+	<!--DO NOT TOUCH-->
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/simple-line-icons.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style3.css">
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+    <script src="js/main.js"></script>
+    <!-- <script src="js/quiz.js"></script> -->
+	<!--DO NOT TOUCH-->
+    <script>
+            if(sessionStorage.getItem("user")==null){
+                window.location.assign("http://localhost:8081/index.html");
+            }
+
+            if(sessionStorage.getItem("quiz")==null){
+			window.location.assign("http://localhost:8081/dashboard.html");
+            }
+
+            // alert(sessionStorage.getItem("quiz"));
+            function logout(){
+                sessionStorage.removeItem("user")
+                sessionStorage.removeItem("course")
+                sessionStorage.removeItem("quiz")
+                window.location.assign("http://localhost:8081/index.html");
+            }
+            function dash(){
+                sessionStorage.removeItem("quiz")
+                window.location.assign("http://localhost:8081/dashboard.html");
+            }
+    </script>
+    <script>
+        var quiz;
+        var quiztitle = "Quiz Title";
+        var currentquestion = 0, score = 0, submt=true, picked;
+    
+        jQuery(document).ready(function($){
+    
+            function htmlEncode(value){
+              return $(document.createElement('div')).text(value).html();
+            }
+    
+            function addChoices(choices){
+                if(typeof choices !== "undefined" && $.type(choices) == "array"){
+                    $('#choice-block').empty();
+                    for(var i=0;i<choices.length; i++){
+                        $(document.createElement('li')).addClass('choice btn btn-primary btn-lg').attr('data-index', i).text(choices[i]).appendTo('#choice-block');  
+                        $(document.createElement('br')).appendTo('#choice-block'); 
+                        $(document.createElement('br')).appendTo('#choice-block'); 
+                        $(document.createElement('br')).appendTo('#choice-block');                 
+                    }
+                }
+            }
+            
+            function nextQuestion(){
+                submt = true;
+                $('#question').text(quiz[currentquestion]['question']);
+                $('#pager').text('Question ' + Number(currentquestion + 1) + ' of ' + quiz.length);
+                
+                addChoices(quiz[currentquestion]['choices']);
+                setupButtons();
+            }
+    
+            function processQuestion(choice){
+                if(quiz[currentquestion]['choices'][choice] == quiz[currentquestion]['correct']){
+                    $('.choice').eq(choice).css({'background-color':'#50D943'});
+                   
+                    score++;
+                } else {
+                    $('.choice').eq(choice).css({'background-color':'#D92623'});
+                   
+                }
+                currentquestion++;
+                $('#submitbutton').html('NEXT QUESTION &raquo;').on('click', function(){
+                    if(currentquestion == quiz.length){
+                        endQuiz();
+                    } else {
+                        $(this).text('Check Answer').css({'color':'#222'}).off('click');
+                        nextQuestion();
+                    }
+                })
+            }
+    
+            function setupButtons(){
+                
+                $('.choice').on('click', function(){
+                    picked = $(this).attr('data-index');
+                    $('.choice').removeAttr('style').off('mouseout mouseover');
+                    $(this).css({'border-color':'#222','font-weight':700,'background-color':'#c1c1c1'});
+                    if(submt){
+                        submt=false;
+                        $('#submitbutton').css({'color':'#000'}).on('click', function(){
+                            $('.choice').off('click');
+                            $(this).off('click');
+                            processQuestion(picked);
+                        });
+                    }
+                })
+            }
+                   
+            function endQuiz(){
+                $('#explanation').empty();
+                $('#question').empty();
+                $('#choice-block').empty();
+                $('#submitbutton').remove();
+                $('#question').text("You got " + score + " out of " + quiz.length + " correct.");
+                $(document.createElement('h2')).css({'text-align':'center', 'font-size':'4em'}).text(Math.round(score/quiz.length * 100) + '%').insertAfter('#question');
+                // $(document.createElement('button')).addClass('btn2 btn2-primary btn-lg').value("Back <<<").insertAfter('#question');
+                
+                var user=sessionStorage.getItem("user");
+                
+                var lang=sessionStorage.getItem("quiz");
+                var payLoad ={'user':user,'quiz': lang,'score':score};
+                alert(payLoad)
+                $.ajax({
+                type : 'POST',
+                url : '/api/v1/send_result',
+                data : payLoad,
+                success: function(response){
+                    alert(response);
+                }
+                });
+            }
+            
+            function init(){
+               
+                //add pager and questions
+                if(typeof quiz !== "undefined" && $.type(quiz) === "array"){
+                    //add pager
+                    $(document.createElement('p')).addClass('pager').attr('id','pager').text('Question 1 of ' + quiz.length).appendTo('#frame');
+                    //add first question
+                    $(document.createElement('h1')).addClass('question').attr('id', 'question').text(quiz[0]['question']).appendTo('#frame');
+                    
+                    //questions holder
+                    $(document.createElement('ul')).attr('id', 'choice-block').appendTo('#frame');
+                    //add choices
+                    addChoices(quiz[0]['choices']);
+                    //add submit button
+                    $(document.createElement('div')).addClass('choice-box').attr('id', 'submitbutton').text('Check Answer').css({'font-weight':700,'color':'#222','padding':'30px 0'}).appendTo('#frame');
+                
+                    setupButtons();
+                }
+            }
+            
+            $.ajax({
+             type : 'GET',
+             url : '/api/v1/get_questions',
+             success: function(response){
+                quiz=response;
+                init();
+            }
+           });
+            
+        });
+        </script>
+
+	</head>
+	<body >
+	<header role="banner" id="fh5co-header">
+			<div class="container">
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="index.html">CodeShaala</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li ><a onclick="dash()" data-nav-section="home"><span>Quit</span></a></li>
+		            <li><a onclick="logout()" data-nav-section="contact"><span>Logout</span></a></li>
+		          </ul>
+		        </div>
+			    </nav>
+		     </div>
+	</header>
+
+	
+    
+        <section id="fh5co-work"  data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 section-heading text-center to-animate">
+                        <h2>Quiz Time!</h2>
+                    </div>
+                </div>
+                <div class="row text-center">
+                        <div id="frame" role="content"></div>
+                </div>
+            </div>
+        </section>
+        <style type="text/css" media="all">
+            /*css reset */
+            html,body,div,span,p,code,small,strike,strong,sub,sup,b,u,i{
+                border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0;} 
+            article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;} 
+            body{line-height:1; font:normal 0.9em/1em "Helvetica Neue", Helvetica, Arial, sans-serif;} 
+            ol,ul{list-style:none;}
+            strong{font-weight:700;}
+            #frame{width:auto;padding:10px;margin:3px;background: none;border: none}
+            p.pager{margin:5px 0 5px;color:whitesmoke}
+            .question{ color: white}
+            #choice-block{display:block;list-style:none;margin:0;padding:0;}
+            #submitbutton{background:#5a6b8c;}
+            #submitbutton:hover{background:#7b8da6;}
+            #explanation{margin:0 auto;padding:20px;width:75%;}
+            .choice-box{width:50%;display:block;text-align:center;margin:8px auto;padding:10px 0;border:1px solid #666;cursor:pointer;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+		</style>
+		
+	
+
+	</body>
+</html>
+

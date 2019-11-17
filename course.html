@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+
+	<title>CodeShaala</title>
+
+	<!--DO NOT TOUCH-->
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/simple-line-icons.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style3.css">
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+	<!--DO NOT TOUCH-->
+    <script type="text/javascript">
+
+
+
+        if(sessionStorage.getItem("user")==null){
+			window.location.assign("http://localhost:8081/index.html");
+        }
+
+        if(sessionStorage.getItem("course")==null){
+			window.location.assign("http://localhost:8081/dashboard.html");
+        }
+
+        // alert(sessionStorage.getItem("course"));
+        var user=sessionStorage.getItem("user");
+        var lang=sessionStorage.getItem("course");
+        
+
+        var payLoad ={'user':user,'course':lang};
+        $.ajax({
+                type : 'POST',
+                url : '/api/v1/taken_course',
+                data : payLoad,
+                success: function(response){
+                    if(response=='true'){
+                        var elem = document.querySelector('#franco');
+                    elem.parentNode.removeChild(elem);
+                    }
+                }
+        });
+
+        var payLoad ={'course':lang};
+        $.ajax({
+                type : 'POST',
+                url : '/api/v1/get_content',
+                data : payLoad,
+                success: function(response){
+                    // alert(response);
+                    document.getElementById("target").innerHTML=response;
+                }
+        });
+        
+		function logout(){
+			sessionStorage.removeItem("user")
+			sessionStorage.removeItem("course")
+			sessionStorage.removeItem("quiz")
+			window.location.assign("http://localhost:8081/index.html");
+		}
+        function dash(){
+                window.location.assign("http://localhost:8081/dashboard.html");
+            }
+
+        function stat(){
+                window.location.assign("http://localhost:8081/stat.html");
+        }
+        function rate(){
+            // alert("here");
+            var r1=document.getElementById("star-1").checked
+            var r2=document.getElementById("star-2").checked
+            var r3=document.getElementById("star-3").checked
+            var r4=document.getElementById("star-4").checked
+            var r5=document.getElementById("star-5").checked
+            var res=0;
+            if(r1)res=1;
+            if(r2)res=2;
+            if(r3)res=3;
+            if(r4)res=4;
+            if(r5)res=5;
+            var payLoad ={'user':user,'course':lang,"rate":res};
+            $.ajax({
+                type : 'POST',
+                url : '/api/v1/rate_course',
+                data : payLoad,
+                success: function(response){
+                    alert(response);
+                    var elem = document.querySelector('#franco');
+                    elem.parentNode.removeChild(elem);
+                    
+                }
+            });
+        }
+            
+    </script>
+
+	</head>
+	<body>
+	<header role="banner" id="fh5co-header">
+			<div class="container">
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="index.html">CodeShaala</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li ><a href="http://localhost:8081/dashboard.html"><span>DashBoard</span></a></li>                 
+                    <li><a onclick="stat()"><span>Stats</span></a></li>
+                    <li><a onclick="logout()"  data-nav-section="Register"><span>Logout</span></a></li>
+		            
+		          </ul>
+		        </div>
+			    </nav>
+			  <!-- </div> -->
+		  </div>
+	</header>
+	<section id="fh5co-work" data-section="Base" data-stellar-background-ratio="0.5">
+		
+		<div class="container">
+                    
+                    
+					<div class="row">
+                        
+                            <div class=" text-center">
+                                    
+                                    <h1 id='head1' style="color: white; font-size:60px;text-transform: uppercase;">0</h1>
+                                    <br>
+                                    
+                                    <script>document.getElementById('head1').innerHTML="Current Course: "+sessionStorage.getItem("course")</script>
+                            </div>
+                            <div id="target" class="highlight"> </div>
+                            <div id="franco">
+                            <style>
+                                    
+                                    .cont {
+                                      width: 93%;
+                                      max-width: 350px;
+                                      text-align: center;
+                                      margin: 4% auto;
+                                      padding: 30px 0;
+                                      background: #111;
+                                      color: #EEE;
+                                      border-radius: 5px;
+                                      border: thin solid #EEE;
+                                      overflow: hidden;
+                                    }
+                                    
+                                    hr {
+                                      margin: 20px;
+                                      border: none;
+                                      border-bottom: thin solid rgba(255,255,255,.1);
+                                    }
+                                    
+                                    div.title { font-size: px; }
+                                    
+                                    
+                                    
+                                    div.stars {
+                                      width: 270px;
+                                      display: inline-block;
+                                    }
+                                    
+                                    input.star { display: none; }
+                                    
+                                    label.star {
+                                      float: right;
+                                      padding: 10px;
+                                      font-size: 36px;
+                                      color: #444;
+                                      transition: all .2s;
+                                    }
+                                    
+                                    input.star:checked ~ label.star:before {
+                                      content: '\f005';
+                                      color: #FD4;
+                                      transition: all .25s;
+                                    }
+                                    
+                                    input.star-5:checked ~ label.star:before {
+                                      color: #FE7;
+                                      text-shadow: 0 0 20px #952;
+                                    }
+                                    
+                                    input.star-1:checked ~ label.star:before { color: #F62; }
+                                    
+                                    label.star:hover { transform: rotate(-15deg) scale(1.3); }
+                                    
+                                    label.star:before {
+                                      content: '\f006';
+                                      font-family: FontAwesome;
+                                    }
+                            </style>
+
+                            <div class="cont" style="margin-top:150px;">
+                                    <div class="title">
+                                    <h2  style="color: white; font-size:60px;">Rate Course To Finish!</h2>
+                                    </div>
+                                    <div class="stars">
+                                    
+                                        <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                        <label class="star star-5" for="star-5"></label>
+                                        <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                        <label class="star star-4" for="star-4"></label>
+                                        <input class="star star-3" id="star-3" type="radio" name="star"/>
+                                        <label class="star star-3" for="star-3"></label>
+                                        <input class="star star-2" id="star-2" type="radio" name="star"/>
+                                        <label class="star star-2" for="star-2"></label>
+                                        <input class="star star-1" id="star-1" type="radio" name="star"/>
+                                        <label class="star star-1" for="star-1"></label>
+                                        <button class="btn btn-primary btn-lg" onclick="rate()" id="loginForm" >Rate!</button>
+                                    
+                                    </div>
+                            </div>
+                            </div>
+                            
+                            </div>	
+                        </div>
+				
+		</div>
+		
+    </section>
+
+	</body>
+</html>
+

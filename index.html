@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+
+	<title>CodeShaala</title>
+
+	<!--DO NOT TOUCH-->
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/simple-line-icons.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style3.css">
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<script src="js/main.js"></script>
+	<!--DO NOT TOUCH-->
+
+
+	</head>
+	<body>
+	<header role="banner" id="fh5co-header">
+			<div class="container">
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="index.html">CodeShaala</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li class="active"><a href="#Login" data-nav-section="Login"><span>Login</span></a></li>
+		            <li><a href="#Register" data-nav-section="Register"><span>Register</span></a></li>
+		            
+		          </ul>
+		        </div>
+			    </nav>
+			  <!-- </div> -->
+		  </div>
+	</header>
+
+	<section id="fh5co-home" data-section="Base" data-stellar-background-ratio="0.5">
+		<div class="gradient"></div>
+		<div class="container">
+			<div class="text-wrap">
+				<div class="text-inner">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<h1 class="to-animate" style="font-weight:50">Welcome to CodeShaala.</h1>
+							<br>
+							<h2 class="to-animate"style="color:white ;font-weight:25">Dozens of Languages to learn...</h2>
+							<h2 class="to-animate"style="color:white ;font-weight:25">Hundreds of intuitive  questions...</h2>
+							<h2 class="to-animate"style="color:white ;font-weight:25 "> Thousands of participants to compete with...</h2>
+							<br>
+							<h1 class="to-animate"style="font-weight:50">Login/Register to Continue.</h1>
+
+                        </div>
+                        
+					</div>
+				</div>
+            </div>
+		</div>
+		<div class="slant"></div>
+    </section>
+
+	<section id="fh5co-contact" data-section="Login">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 section-heading text-center" >
+					<h2 class="to-animate">Login</h2>
+					
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 subtext to-animate">
+
+							<h3>You are just a click away...</h3>
+						</div>	
+					</div>
+					<input id="lname" class="form-control" placeholder="Name" type="text" style="margin:0 auto;width:50%;">
+					<br>
+					<input id="lpass" class="form-control" placeholder="Password" type="password" style="margin:0 auto;width:50%;">
+					<br>
+					<button class="btn btn-primary btn-lg"  onclick="login()">Login</button>
+				</div>	
+			</div>
+		</div>
+		
+	</section>
+
+	<script>
+
+	function login(){
+     var uname  = $("#lname").val();
+     var upass = $("#lpass").val();
+     var loginData ={'name': uname,'pass':upass};
+     $.ajax({
+         type : 'POST',
+         url : '/api/v1/login',
+         data : loginData,
+         success: function(response){
+		if (response.result=='OK') {
+			alert("Redirecting to dashboard...")
+			sessionStorage.setItem("user",uname);
+			window.location.assign("http://localhost:8081/dashboard.html");
+		}
+		else {
+			alert(response.result)
+			window.location.assign("http://localhost:8081/index.html");
+		}
+		
+        }
+       });
+}
+
+	function register(){
+	var uname  = $("#rname").val();
+	var upass = $("#rpass").val();
+	var umail = $("#rmail").val();
+	var loginData ={'name': uname,'pass':upass,'mail':umail};
+	$.ajax({
+		type : 'POST',
+		url : '/api/v1/register',
+		data : loginData,
+		success: function(response){
+			alert(response.result)
+			window.location.assign("http://localhost:8081");
+			
+		}
+	  });
+}
+
+	</script>
+
+    <section id="fh5co-services" data-section="Register" >
+		<div class="gradient"></div>
+		<div class="container">
+			<div class="text-wrap">
+				<div class="text-inner">
+					<div class="row">
+						<div class="row">
+                            <div class="col-md-12 section-heading text-center">
+                                <h2 class="to-animate"style="color:white;">Register</h1>
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                                        <h3>Let's Just Right Into it!</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-bottom-padded-md">
+                            <div class="col-md-6 to-animate" style="border-right-style: solid;"align="center">
+                                
+                                <br>
+                                <h2 style="color:white "> Explore the World of Code!</h2>
+                                <br>
+                                <br>
+                                <ul style="list-style: none">
+                                    <li><h3 style="color:white ">Thousands of Participants to compete with!</h3></li>
+                                    <li><h3 style="color:white ">Innovative Learning Interface!</h3></li>
+                                    <li><h3 style="color:white ">Adaptive Quiz to test your knowledge!</h3></li>
+                                </ul>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+            
+                            <div class="col-md-6 to-animate" style="left:4%">
+                                <h2 style="color:white ">Fill 'er up!</h2>
+                                <br>
+								<label for="r_name" class="sr-only">Username</label>
+								<input  style="background-color: white" id="rname" class="form-control" placeholder="Name" type="text">
+								<br>
+								<label for="r_email" class="sr-only">Email</label>
+								<input style="background-color: white" id="rmail" class="form-control" placeholder="Email" type="email">
+								<br>
+								<label for="r_pwd" class="sr-only">Password</label>
+								<input style="background-color: white" id="rpass" class="form-control" placeholder="Password" type="password">
+								<br>
+								<button onclick="register()" class="btn2 btn2-primary btn-lg " >Register</button>
+                                </div>
+                            </div>
+                        
+					</div>
+				</div>
+            </div>
+		</div>
+		<div class="slant"></div>
+	</section>
+
+	</body>
+</html>
+

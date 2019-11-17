@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+
+	<title>CodeShaala</title>
+
+	<!--DO NOT TOUCH-->
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/simple-line-icons.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style3.css">
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<script src="js/main.js"></script>
+	<!--DO NOT TOUCH-->
+
+	<script>
+		if(sessionStorage.getItem("user")==null){
+			window.location.assign("http://localhost:8081/index.html");
+		}
+		function logout(){
+			sessionStorage.removeItem("user")
+			sessionStorage.removeItem("course")
+			sessionStorage.removeItem("quiz")
+			window.location.assign("http://localhost:8081/index.html");
+		}
+		function stat(){
+                // sessionStorage.removeItem("course")
+                window.location.assign("http://localhost:8081/stat.html");
+        }
+	</script>
+	</head>
+	<body>
+	<header role="banner" id="fh5co-header">
+			<div class="container">
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="index.html">CodeShaala</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
+		            <li><a href="#" data-nav-section="courses"><span>Courses</span></a></li>
+		            <li><a href="#" data-nav-section="quizez"><span>Quiz</span></a></li>
+		            <li><a onclick="stat()" ><span>Statistics</span></a></li>
+		            <li><a onclick="logout()" ><span>Logout</span></a></li>
+		          </ul>
+		        </div>
+			    </nav>
+			  <!-- </div> -->
+		  </div>
+	</header>
+
+	<section id="fh5co-home" data-section="home" data-stellar-background-ratio="0.5">
+		<div class="gradient"></div>
+		<div class="container">
+			<div class="text-wrap">
+				<div class="text-inner">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<h1 class="to-animate">Welcome Back, <span id="welcome"></span></h1>
+							<h2 class="to-animate">Ready to learn?</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="slant"></div> -->
+	</section>
+	<script>
+			document.getElementById("welcome").innerHTML=sessionStorage.getItem("user");
+	</script>
+
+	<script>
+		function setCourse(course){
+			sessionStorage.setItem("course",course);
+		};
+		function setQuiz(quiz){
+			sessionStorage.setItem("quiz",quiz);
+		};
+	</script>
+	<section id="fh5co-work" data-section="courses">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 section-heading text-center" >
+					<h2 class="to-animate">Courses offered.</h2>
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 subtext to-animate">
+							<h3>Pick Your Poison.</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row row-bottom-padded-sm">
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html" onclick="setCourse('c')" class="fh5co-project-item  to-animate" >
+						<img src="images/c.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>ANSI-C</h2>
+						<!-- <span>Branding</span> -->
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html"onclick="setCourse('cpp')" class="fh5co-project-item  to-animate">
+						<img src="images/cpp.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>C++</h2>
+						<!-- <span>Web</span> -->
+						</div>
+					</a>
+				</div>
+
+				<div class="clearfix visible-sm-block"></div>
+
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html" onclick="setCourse('python')" class="fh5co-project-item  to-animate">
+						<img src="images/python.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>Python</h2>
+						<!-- <span>Web</span> -->
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html" onclick="setCourse('java')" class="fh5co-project-item  to-animate">
+						<img src="images/java.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>java</h2>
+						<!-- <span>UI/UX</span> -->
+						</div>
+					</a>
+				</div>
+				
+				<div class="clearfix visible-sm-block"></div>
+
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html" onclick="setCourse('html5')" class="fh5co-project-item  to-animate">
+						<img src="images/html5.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>html</h2>
+						<!-- <span>Photography</span> -->
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html" onclick="setCourse('js')" class="fh5co-project-item  to-animate">
+						<img src="images/javascript.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>Project 2</h2>
+						<!-- <span>Illustration</span> -->
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html" onclick="setCourse('ruby')" class="fh5co-project-item  to-animate">
+						<img src="images/ruby.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>Ruby</h2>
+						<!-- <span>UI/UX</span> -->
+						</div>
+					</a>
+				</div>
+				
+				<div class="clearfix visible-sm-block"></div>
+
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html" onclick="setCourse('go')" class="fh5co-project-item  to-animate">
+						<img src="images/go.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>Go</h2>
+						<!-- <span>Photography</span> -->
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a href="http://localhost:8081/course.html" onclick="setCourse('scala')" class="fh5co-project-item  to-animate">
+						<img src="images/scala.jpg" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>Scala</h2>
+						<!-- <span>Illustration</span> -->
+						</div>
+					</a>
+				</div>
+				<div class="clearfix visible-sm-block"></div>
+
+				
+			</div>
+			
+		</div>
+	</section>
+	<section id="fh5co-work" data-section="quizez">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 section-heading text-center">
+						<h2 class="to-animate">Quiz Time!</h2>
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2 subtext to-animate">
+								<h3>Ready.Set.Go!</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row row-bottom-padded-sm">
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('c')" class="fh5co-project-item  to-animate" >
+							<img src="images/c.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>ANSI-C</h2>
+							<!-- <span>Branding</span> -->
+							</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('cpp')" class="fh5co-project-item  to-animate">
+							<img src="images/cpp.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>C++</h2>
+							<!-- <span>Web</span> -->
+							</div>
+						</a>
+					</div>
+	
+					<div class="clearfix visible-sm-block"></div>
+	
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('python')" class="fh5co-project-item  to-animate">
+							<img src="images/python.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>Python</h2>
+							<!-- <span>Web</span> -->
+							</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('java')" class="fh5co-project-item  to-animate">
+							<img src="images/java.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>java</h2>
+							<!-- <span>UI/UX</span> -->
+							</div>
+						</a>
+					</div>
+					
+					<div class="clearfix visible-sm-block"></div>
+	
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('html5')" class="fh5co-project-item  to-animate">
+							<img src="images/html5.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>html</h2>
+							<!-- <span>Photography</span> -->
+							</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('js')" class="fh5co-project-item  to-animate">
+							<img src="images/javascript.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>Project 2</h2>
+							<!-- <span>Illustration</span> -->
+							</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('ruby')" class="fh5co-project-item  to-animate">
+							<img src="images/ruby.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>Ruby</h2>
+							<!-- <span>UI/UX</span> -->
+							</div>
+						</a>
+					</div>
+					
+					<div class="clearfix visible-sm-block"></div>
+	
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" class="fh5co-project-item  to-animate">
+							<img src="images/go.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>Go</h2>
+							<!-- <span>Photography</span> -->
+							</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xxs-12">
+						<a href="http://localhost:8081/quiz.html" class="fh5co-project-item  to-animate">
+							<img src="images/scala.jpg" alt="Image" class="img-responsive">
+							<div class="fh5co-text">
+							<h2>Scala</h2>
+							<!-- <span>Illustration</span> -->
+							</div>
+						</a>
+					</div>
+					<div class="clearfix visible-sm-block"></div>
+	
+					
+				</div>
+				
+			</div>
+		</section>
+	
+	
+
+	
+
+	
+
+	</body>
+</html>
+
