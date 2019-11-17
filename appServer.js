@@ -14,6 +14,36 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
+
+function len(obj){
+    var len=0;
+    for(var i in obj){
+        len++
+    }
+    return len;
+}
+
+
+function euclidean_score(dataset,p1,p2){
+    var existp1p2 = {};
+    for(var key in dataset[p1]){
+        if(key in dataset[p2]){
+            existp1p2[key] = 1
+        }
+    }
+        if(len(existp1p2) ==0) return 0;
+        var sum=0;
+        for(var item in dataset[p1]){
+            if(item in dataset[p2]){
+                sum +=(Math.pow(dataset[p1][item]-dataset[p2][item],2));
+            }
+        }
+        
+        var sum_sqrt = 1/(1 +Math.sqrt(sum));    
+        return sum_sqrt;
+    
+}
+
 app.use(session({
     secret: 'SadTanookiNoises',
     resave: true,
@@ -23,7 +53,42 @@ app.use(session({
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
- 
+
+app.post('/api/v1/get_highscore',function(req,res){
+    var user=req.body.user;
+    var name=req.body.quiz;
+    var content = fs.readFileSync("data/user_data.json");
+    var dat = JSON.parse(content)
+    var flag=false;
+    var i=0;
+    for(; i < dat.users.length; i++)   
+    {
+        if(dat.users[i].username == user)
+        {
+        console.log("here");
+        flag=true;
+        break;
+    }
+    }
+    var thisuser;
+    console.log(dat.users[0]);
+    var arr=dat.users[i].quizes;
+    flag=false;
+    for (i = 0; i < arr.length; i++) {
+        if (arr[i].hasOwnProperty(name)) {
+            thisuser=arr[i]
+            flag=true;
+            break;
+        }
+    }
+    if(flag){
+        return res.status(200).send(thisuser[name]);
+    }
+    else{
+        return res.status(200).send("0");
+    }
+});
+
 app.get('/api/v1/get_questions',function(req,res){
     var content = fs.readFileSync("data/quiz_data.json");
     var dat = JSON.parse(content);
@@ -125,8 +190,39 @@ app.post('/api/v1/rate_course',function(req,res){
     var rating=req.body.rate;
     var content = fs.readFileSync("data/ratings_data.json");
     var dat = JSON.parse(content);
-    dat.ratings.push({"course":course,"rating":rating});
+
+
+    var flag=false;
+    var i=0;
+    for(; i < dat.ratings.length; i++)   
+    {
+        if(dat.ratings[i].user == user)
+        {
+        flag=true;
+        break;
+    }
+    }
+    if(flag){
+        var payload={
+        }
+        payload[course]=rating;
+        console.log(dat.ratings[i].courses);
+        dat.ratings[i].courses[course]=rating;
+        fs.writeFile("data/ratings_data.json", JSON.stringify(dat));
+    }
+    else{
+        var payload={
+        }
+        payload[course]=rating
+        // arr.push(payload);
+        dat.ratings.push({"user":user,"courses":payload});
+        
+    }
+    
     fs.writeFile("data/ratings_data.json", JSON.stringify(dat));
+    
+    
+    //add course to user_data
     var content = fs.readFileSync("data/user_data.json");
     var dat = JSON.parse(content);
     var flag=false;
@@ -252,6 +348,94 @@ app.post('/api/v1/register',function(req, res){
     
 });
  
+app.post('/api/v1/recmon', function(req, response){
+var p1=req.body.user;
+var content = fs.readFileSync("data/ratings_data.json");
+var dat = JSON.parse(content);
+var db ={};
+for(var i=0; i < dat.ratings.length; i++)   
+    {
+        var item=dat.ratings[i];
+        db[item.user]={}
+        for(var lang in item.courses){
+            db[item.user][lang]=parseInt(item.courses[lang])
+        }
+    }
+var m1= -1;
+var m2= -1;
+var m3=-1;
+var f=p1;
+var s=p1;
+var t=p1;
+if(Object.keys(db[p1]).length==0){
+    var p1lang={}
+}
+else{
+    var p1lang=db[p1];
+}
+for(var p2 in db){
+    if(p2!=p1){
+        var x=euclidean_score(db,p1,p2)
+        if(x>m1){
+            t=s;
+            s=f;
+            f=p2;
+            m3=m2;
+            m2=m1;
+            m1=x;
+            
+        }
+        else{
+            if(x>m2){
+                t=s;
+                s=p2;
+                m3=m2;
+                m2=x;
+
+            }
+            else{
+                if(x>m3){
+                    t=p2;
+                    m3=x;
+                }
+            }
+        }
+    }
+}
+var arr=[];
+var res={};
+arr.push(f);
+arr.push(s);
+arr.push(t);
+for(var p2 in arr){
+    for(var lang in db[arr[p2]]){
+        if(!p1lang.hasOwnProperty(lang) & !res.hasOwnProperty()){
+            res[lang]=lang;
+            if(Object.keys(res).length>=3){
+                break;
+            }
+        }
+    }    
+    if(Object.keys(res).length>=3){
+        break;
+    }
+}
+if(Object.keys(res).length<3){
+    for(var p2 in arr){
+        for(var lang in db[arr[p2]]){   
+                res[lang]=lang;
+                if(Object.keys(res).length>=3){
+                    break;
+                }
+        }    
+        if(Object.keys(res).length>=3){
+            break;
+        }
+    }  
+}
+// console.log(res);
+return response.status(200).send(res);
+});
 
 
 var server = app.listen(8081, function(){

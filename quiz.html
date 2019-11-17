@@ -47,7 +47,20 @@
                         }
                     });
             }, 60 * 1000); 
-            // alert(sessionStorage.getItem("quiz"));
+
+
+            var user=sessionStorage.getItem("user");    
+            var lang=sessionStorage.getItem("quiz");
+            var payLoad ={'user':user,'quiz':lang};
+            $.ajax({
+                type : 'POST',
+                url : '/api/v1/get_highscore',
+                data : payLoad,
+                success: function(response){
+                    document.getElementById('hs').innerHTML=response;
+                }
+            });
+            
             function logout(){
                 sessionStorage.removeItem("user")
                 sessionStorage.removeItem("course")
@@ -142,7 +155,7 @@
                 var lang=sessionStorage.getItem("quiz");
                 var payLoad ={'user':user,'quiz': lang,'score':score};
                 // alert(payLoad)
-                
+
                 $.ajax({
                 type : 'POST',
                 url : '/api/v1/send_result',
@@ -151,6 +164,19 @@
                     alert(response);
                 }
                 });
+
+                var user=sessionStorage.getItem("user");    
+                var lang=sessionStorage.getItem("quiz");
+                var payLoad ={'user':user,'quiz':lang};
+                $.ajax({
+                    type : 'POST',
+                    url : '/api/v1/get_highscore',
+                    data : payLoad,
+                    success: function(response){
+                        document.getElementById('hs').innerHTML=response;
+                    }
+                });
+            
             }
             
             function init(){
@@ -183,6 +209,9 @@
            });
             
         });
+        
+
+        
         </script>
 
 	</head>
@@ -211,6 +240,7 @@
                 <div class="row">
                     <div class="col-md-12 section-heading text-center to-animate">
                         <h2>Quiz Time!</h2>
+                        <h1><span>HighScore:</span><span id="hs">-1</span></h1>
                     </div>
                 </div>
                 <div class="row text-center">

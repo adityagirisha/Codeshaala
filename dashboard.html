@@ -44,7 +44,23 @@
 
 		var user=sessionStorage.getItem("user");
         var payLoad ={'user':user};
-        
+        $.ajax({
+                type : 'POST',
+                url : '/api/v1/recmon',
+                data : payLoad,
+                success: function(response){
+					var arr=Object.keys(response);
+					document.getElementById('hrec1').innerHTML=arr[0];
+					document.getElementById('hrec2').innerHTML=arr[1];
+					document.getElementById('hrec3').innerHTML=arr[2];
+					document.getElementById('irec1').src="/images/"+arr[0]+".jpg";
+					document.getElementById('irec2').src="/images/"+arr[1]+".jpg";
+					document.getElementById('irec3').src="/images/"+arr[2]+".jpg";
+					document.getElementById('arec1').setAttribute('onclick',"setCourse(\'"+arr[0]+"\')");
+					document.getElementById('arec2').setAttribute('onclick',"setCourse(\'"+arr[1]+"\')");
+					document.getElementById('arec3').setAttribute('onclick',"setCourse(\'"+arr[2]+"\')");
+                }
+        });
 		setInterval(function() {
 			console.log(payLoad);
 			$.ajax({
@@ -87,13 +103,22 @@
 				<div class="text-inner">
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2">
+							<br>
+							<br>
 							<h1 class="to-animate">Welcome Back, <span id="welcome"></span></h1>
 							<h2 class="to-animate">Ready to learn?</h2>
+							<br>
+							<br>
+							
 						</div>
+						
+						
 					</div>
+					
 				</div>
 			</div>
 		</div>
+		
 		<!-- <div class="slant"></div> -->
 	</section>
 	<script>
@@ -108,6 +133,51 @@
 			sessionStorage.setItem("quiz",quiz);
 		};
 	</script>
+
+<section id="fh5co-work" data-section="recc">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 section-heading text-center" >
+					<h2 class="to-animate">Top Reccomendation!</h2>
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 subtext to-animate">
+							<h3>Tailored just for you.</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row row-bottom-padded-sm">
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a id="arec1" href="http://localhost:8081/course.html"  class="fh5co-project-item  to-animate" >
+						<img id="irec1" src="" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2 id="hrec1">Recc1</h2>
+						<!-- <span>Branding</span> -->
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a id="arec2" href="http://localhost:8081/course.html" class="fh5co-project-item  to-animate">
+						<img id="irec2" src="" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2 id="hrec2">Recc2</h2>
+						<!-- <span>Web</span> -->
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xxs-12">
+					<a id="arec3" href="http://localhost:8081/course.html"  class="fh5co-project-item  to-animate">
+						<img id="irec3" src="" alt="Image" class="img-responsive">
+						<div class="fh5co-text">
+						<h2 id="hrec3">Recc3</h2>
+						<!-- <span>Web</span> -->
+						</div>
+					</a>
+				</div>	
+			</div>
+			
+		</div>
+	</section>
 	<section id="fh5co-work" data-section="courses">
 		<div class="container">
 			<div class="row">
@@ -174,7 +244,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xxs-12">
 					<a href="http://localhost:8081/course.html" onclick="setCourse('js')" class="fh5co-project-item  to-animate">
-						<img src="images/javascript.jpg" alt="Image" class="img-responsive">
+						<img src="images/js.jpg" alt="Image" class="img-responsive">
 						<div class="fh5co-text">
 						<h2>Project 2</h2>
 						<!-- <span>Illustration</span> -->
@@ -284,7 +354,7 @@
 					</div>
 					<div class="col-md-4 col-sm-6 col-xxs-12">
 						<a href="http://localhost:8081/quiz.html" onclick="setQuiz('js')" class="fh5co-project-item  to-animate">
-							<img src="images/javascript.jpg" alt="Image" class="img-responsive">
+							<img src="images/js.jpg" alt="Image" class="img-responsive">
 							<div class="fh5co-text">
 							<h2>Project 2</h2>
 							<!-- <span>Illustration</span> -->
