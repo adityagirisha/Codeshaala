@@ -28,18 +28,14 @@
 
 	<!--DO NOT TOUCH-->
     <script type="text/javascript">
-
-
-
         if(sessionStorage.getItem("user")==null){
 			window.location.assign("http://localhost:8081/index.html");
         }
-
         if(sessionStorage.getItem("course")==null){
 			window.location.assign("http://localhost:8081/dashboard.html");
         }
 
-        // alert(sessionStorage.getItem("course"));
+
         var user=sessionStorage.getItem("user");
         var lang=sessionStorage.getItem("course");
         var payLoad ={'user':user,'course':lang};
@@ -55,28 +51,47 @@
                 }
         });
 
-        var payLoad ={'course':lang};
+        setInterval(function() {
+          var payLoad ={'user':user};   
+          console.log(payLoad);
+          $.ajax({
+                    type : 'POST',
+                    url : '/api/v1/update_clock',
+                    data : payLoad,
+                    success: function(response){
+                        console.log("time!");
+                        }
+                    });
+        }, 60 * 1000); 
+
+        var sect=0;
+        var payLoad ={'course':lang,"sect":[sect]};
         $.ajax({
                 type : 'POST',
                 url : '/api/v1/get_content',
                 data : payLoad,
                 success: function(response){
-                    // alert(response);
                     document.getElementById("target").innerHTML=response;
                 }
         });
-        var payLoad ={'user':user};      
-		setInterval(function() {
-			console.log(payLoad);
-			$.ajax({
+        
+      setInterval(function() {
+      console.log(document.documentElement.scrollTop);
+      if(document.documentElement.scrollTop>=$(document).height()*0.6){
+        sect+=1;
+        console.log(sect);
+        var payLoad ={'course':lang,"sect":[sect]};
+        
+        $.ajax({
                 type : 'POST',
-                url : '/api/v1/update_clock',
+                url : '/api/v1/get_content',
                 data : payLoad,
                 success: function(response){
-                    console.log("time!");
-                    }
-                });
-		}, 60 * 1000); 
+                    document.getElementById("target").innerHTML+=response;
+                }
+        });
+      }
+		},  1000); 
 		function logout(){
 			sessionStorage.removeItem("user")
 			sessionStorage.removeItem("course")
@@ -91,7 +106,6 @@
                 window.location.assign("http://localhost:8081/stat.html");
         }
         function rate(){
-            // alert("here");
             var r1=document.getElementById("star-1").checked
             var r2=document.getElementById("star-2").checked
             var r3=document.getElementById("star-3").checked
@@ -142,19 +156,17 @@
 	</header>
 	<section id="fh5co-work" data-section="Base" data-stellar-background-ratio="0.5">
 		
-		<div class="container">
-                    
-                    
+		<div class="container">               
 					<div class="row">
-                        
-                            <div class=" text-center">
-                                    
+                            <div class=" text-center">         
                                     <h1 id='head1' style="color: white; font-size:60px;text-transform: uppercase;">0</h1>
                                     <br>
-                                    
                                     <script>document.getElementById('head1').innerHTML="Current Course: "+sessionStorage.getItem("course")</script>
                             </div>
-                            <div id="target" class="highlight"> </div>
+                            <div  class="highlight"> </div>
+                            <pre id="target">
+
+                            </pre>
                             <div id="franco">
                             <style>
                                     
@@ -243,9 +255,7 @@
                         </div>
 				
 		</div>
-		
     </section>
-
 	</body>
 </html>
 

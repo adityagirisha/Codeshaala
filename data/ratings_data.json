@@ -1,7 +1,1 @@
-{"ratings":[{"user":"aditya","courses":{"c":"4","python":"5"}},
-    {"user":"ichika","courses":{"c":"4","java":"5","cpp":"4"}},
-    {"user":"nino","courses":{"html5":"5","js":"4","python":"4"}},
-    {"user":"miku","courses":{"java":"4","scala":"5","ruby":"3"}},
-    {"user":"yotsuba","courses":{"go":"5","js":"3","html5":"4"}},
-    {"user":"itsuki","courses":{"python":"4","go":"5","ruby":"3"}}
-    ]}
+{"ratings":[{"user":"aditya","courses":{"c":"4","python":"5","js":"5"}},{"user":"ichika","courses":{"c":"4","java":"5","cpp":"4"}},{"user":"nino","courses":{"html5":"5","js":"4","python":"4"}},{"user":"miku","courses":{"java":"4","scala":"5","ruby":"3"}},{"user":"yotsuba","courses":{"go":"5","js":"3","html5":"4"}},{"user":"itsuki","courses":{"python":"4","go":"5","ruby":"3"}}]}

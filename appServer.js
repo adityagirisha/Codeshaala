@@ -146,9 +146,10 @@ app.post('/api/v1/send_result',function(req,res){
 
 app.post('/api/v1/get_content',function(req,res){
     var course=req.body.course;
+    var sect=req.body.sect[0];
     var content = fs.readFileSync("data/content_data.json");
     var dat = JSON.parse(content);
-    res.status(200).send(dat[course]); 
+    res.status(200).send(dat[course][sect]); 
 });
 
 app.post('/api/v1/taken_course',function(req,res){
@@ -180,8 +181,6 @@ app.post('/api/v1/taken_course',function(req,res){
     else{
         return res.status(200).send("false");
     }
-    
-
 });
 
 app.post('/api/v1/rate_course',function(req,res){
