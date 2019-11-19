@@ -1,0 +1,108 @@
+@font-face {
+  font-family: Roboto-Regular;
+  src: url('../fonts/roboto/Roboto-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Roboto-Medium;
+  src: url('../fonts/roboto/Roboto-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Roboto-Bold;
+  src: url('../fonts/roboto/Roboto-Bold.ttf'); 
+}
+
+#tableWrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 33px 100px;
+}
+
+#leaderTable {
+  width: 100%;
+}
+
+#heading {
+  font-family: Roboto-Bold;
+  font-size: 34px;
+  color: #333333;
+  line-height: 1.4;
+  text-transform: uppercase;
+  font-weight: unset;
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
+
+td {
+  font-family: Roboto-Medium;
+  font-size: 34px;
+  line-height: 1.4;
+  font-weight: unset;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  color: #999999;
+  padding-right: 50px;
+  padding-left: 50px
+}
+
+body {
+  background: #fa71cd;
+  background: -webkit-linear-gradient(bottom, #c471f5, #fa71cd);
+  background: -o-linear-gradient(bottom, #c471f5, #fa71cd);
+  background: -moz-linear-gradient(bottom, #c471f5, #fa71cd);
+  background: linear-gradient(bottom, #c471f5, #fa71cd);
+}
+
+#leaderTable {
+  background-color: #fff;
+  border-collapse: collapse;
+  box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  -o-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  -ms-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  margin: 0;
+}
+
+tr {
+  border-bottom: 2px solid #f2f2f2;
+}
+
+#navNext {
+  border-left: 2px solid #f1f1f1;
+  width: 50px;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px 15px 5px 15px;
+}
+
+#navPrev {
+  width: 50px;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px 15px 5px 15px;
+}
+
+.navButton {
+  font-size: 16px;
+  padding: 10px 30px 10px 30px;
+  background-color: #fff;
+  box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  -o-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  -ms-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+  font-family: Roboto-Bold;
+  color: #333333;
+  text-transform: uppercase;
+}

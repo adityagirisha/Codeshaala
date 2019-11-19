@@ -432,6 +432,57 @@ if(Object.keys(res).length<3){
 return response.status(200).send(res);
 });
 
+
+app.get('/getleaders', function(req, res) {
+    var page = parseInt(req.query.page);
+    req.setEncoding("utf8");
+    console.log(page);
+    // res.writeHead(200, {"Content-Type":"application/json"});
+    // while(true) {
+        var content = fs.readFileSync("data/score_data.json");
+        var data = JSON.parse(content);
+        var mtime = fs.statSync("data/score_data.json").mtime;
+        console.log(data.length);
+        data.sort((a, b) => (a.score > b.score) ? -1 : 1);
+        if(data.length < 10*page+1) {
+            res.write(JSON.stringify(data.slice(10*(page-1), data.length)));
+            console.log("first");
+            res.end();
+        }
+        else if (data.length < 10*(page+1)){
+            res.write(JSON.stringify(data.slice(10*(page), data.length)));
+            console.log("second");
+            res.end();
+        }
+        else {
+            // res.writeHead(200, {"Content-Type":"application/json"});
+            res.end(JSON.stringify(data.slice(10*(page), 10*(page+1))));
+            console.log("third");
+        }
+        // console.log(fs.statSync("data/score_data.json").mtime);
+        console.log(mtime.getTime());
+        var i =0;
+        while(fs.statSync("data/score_data.json").mtime.getTime() == mtime.getTime()) {
+            if(i%10000000==0){
+                break;
+            }
+            i+=1;
+        }
+    // }
+});
+
+function datesEqual(a, b) {
+    return !(a > b || b > a);
+}
+
+app.get('/leaderboard', function(req, res) {
+    res.sendFile(path.join(__dirname + '/leaderboard.html'));
+});
+
+function sleep(ms) {
+    return new Promise(resolve => {setTimeout(resolve,ms)});
+}
+
 var server = app.listen(8081, function(){
     var port = server.address().port;
     console.log("Server started at http://localhost:%s", port);

@@ -1,0 +1,132 @@
+<html>
+	<head>
+	</head>
+		<link rel="stylesheet" type="text/css" href="css/leaderboard.css">
+	<body>
+		<div id="tableWrapper">
+			<table>
+				<tr>
+					<td id="prevTd"><button id="prevBut" class="navButton">Prev</button></td>
+					<td>
+						<table id="leaderTable">
+							<thead>
+								<tr>
+									<td id="heading"> Rank </th>
+									<td id="heading"> Name </th>
+									<td id="heading"> Score </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td ></td>
+									<td ></td>
+								</tr>
+								<tr >
+									<td ></td>
+									<td ></td>
+									<td ></td>
+								</tr>
+								<tr >
+									<td > </td>
+									<td > </td>
+									<td > </td>
+								</tr>
+								<tr >
+									<td > </td>
+									<td > </td>
+									<td > </td>
+								</tr>
+								<tr >
+									<td > </td>
+									<td > </td>
+									<td > </td>
+								</tr>
+								<tr >
+									<td > </td>
+									<td > </td>
+									<td > </td>
+								</tr>
+								<tr >
+									<td > </td>
+									<td > </td>
+									<td > </td>
+								</tr>
+								<tr >
+									<td > </td>
+									<td > </td>
+									<td > </td>
+								</tr>
+								<tr >
+									<td > </td>
+									<td > </td>
+									<td > </td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+					<td id="nextTd"> <button id="nextBut" class="navButton">Next</button> </td>
+				</tr>
+			</table>
+
+			<!-- <table>
+				<tr>
+					<td id="navPrev"> Prev </td>
+					<td id="navNext"> Next </td>
+				</tr>
+			</table> -->
+		</div>
+		<div height="20px"></div>
+		<script>
+			function initTable() {
+				xhr.abort();
+				xhr = new XMLHttpRequest();
+				xhr.open("GET", "http://localhost:8081/getleaders?page="+page, true)
+				xhr.onreadystatechange = function() {
+					if(this.readyState == 3) {
+						console.log("3");
+						var ents = JSON.parse(this.responseText);
+						window.localStorage.name=ents[0].name;
+						var tds = document.getElementsByTagName("td");
+						for(var i=5, j=0; j<ents.length; i+=3, j+=1) {
+							tds[i].innerHTML = j+1;
+							tds[i+1].innerHTML = ents[j].name;
+							tds[i+2].innerHTML = ents[j].score;
+						}
+						// initTable();
+					}
+					else if(this.readyState == 4){
+						this.abort();
+						initTable();
+					}
+				}
+				xhr.send();
+			}
+			function nextTable() {
+				xhr.abort();
+				page += 1;
+				// if(document.querySelectorAll("td")[document.querySelectorAll("td").length-1].innerHTML != window.localStorage.name){
+				// 	page += 1;
+				// 	window.localStorage.oldname = window.localStorage.name;
+				// }
+				initTable();
+			}
+			function prevTable() {
+				xhr.abort();
+				page -= 1;
+				initTable();
+			}
+
+			var page = 0;
+			var xhr = new XMLHttpRequest();
+			window.onload = initTable;
+			document.getElementsById("nextBut").onclick = nextTable;
+			document.getElementsById("prevBut").onclick = prevTable;
+		</script>
+	</body>
+</html>
