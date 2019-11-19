@@ -1,1 +1,1 @@
-{"users":[{"username":"user","pass":"pass","email":"user1@test.com","courses":["c","html5"],"quizes":[]},{"username":"aditya","pass":"toor","email":"aditya@pm.me","time":424,"courses":["c","python","js"],"quizes":[{"c":"2"},{"cpp":"3"},{"ruby":"3"},{"go":"3"}]}]}
+{"users":[{"username":"user","pass":"pass","email":"user1@test.com","courses":["c","html5"],"quizes":[]},{"username":"aditya","pass":"toor","email":"aditya@pm.me","time":518,"courses":["c","python","js","ruby"],"quizes":[{"c":"3"},{"cpp":"3"},{"ruby":"3"},{"go":"3"}]}]}

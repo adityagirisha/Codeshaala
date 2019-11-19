@@ -5,15 +5,11 @@ var fs = require("fs");
 var session = require('express-session');
 var path = require('path');
 
-
-
-
 var app = express();
 const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
-
 
 function len(obj){
     var len=0;
@@ -22,7 +18,6 @@ function len(obj){
     }
     return len;
 }
-
 
 function euclidean_score(dataset,p1,p2){
     var existp1p2 = {};
@@ -38,7 +33,7 @@ function euclidean_score(dataset,p1,p2){
                 sum +=(Math.pow(dataset[p1][item]-dataset[p2][item],2));
             }
         }
-        
+
         var sum_sqrt = 1/(1 +Math.sqrt(sum));    
         return sum_sqrt;
     
@@ -436,7 +431,6 @@ if(Object.keys(res).length<3){
 // console.log(res);
 return response.status(200).send(res);
 });
-
 
 var server = app.listen(8081, function(){
     var port = server.address().port;
