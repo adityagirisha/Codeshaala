@@ -89,10 +89,11 @@ app.post('/api/v1/get_highscore',function(req,res){
     }
 });
 
-app.get('/api/v1/get_questions',function(req,res){
+app.post('/api/v1/get_questions',function(req,res){
+    var lang=req.body.quiz;
     var content = fs.readFileSync("data/quiz_data.json");
     var dat = JSON.parse(content);
-    return res.status(200).send(dat.quiz1);
+    return res.status(200).send(dat[lang]);
 });
 
 app.post('/api/v1/send_result',function(req,res){

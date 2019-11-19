@@ -1,40 +1,269 @@
-{"quiz1":[
+{
+"cpp":[
     {
-        "question"      :   "Q1: Who came up with the theory of relativity?",
+        "question"      :   "Q1: Do you think we had the patience to make a quiz for every language?",
         
         "choices"       :   [
-                                "Sir Isaac Newton",
-                                "Nicolaus Copernicus",
-                                "Albert Einstein",
-                                "Ralph Waldo Emmerson"
+                                "Yes",
+                                "No",
+                                "Maybe",
+                                "Jeffrey Epstein did not kill himself"
                             ],
-        "correct"       :   "Albert Einstein",
-        "explanation"   :   "Albert Einstein drafted the special theory of relativity in 1905."
+        "correct"       :   "No"
+    }
+
+],
+
+"html5":[
+    {
+        "question"      :   "Q1: Do you think we had the patience to make a quiz for every language?",
+        
+        "choices"       :   [
+                                "Yes",
+                                "No",
+                                "Maybe",
+                                "Jeffrey Epstein did not kill himself"
+                            ],
+        "correct"       :   "No"
+    }
+
+],
+
+"ruby":[
+    {
+        "question"      :   "Q1: Do you think we had the patience to make a quiz for every language?",
+        
+        "choices"       :   [
+                                "Yes",
+                                "No",
+                                "Maybe",
+                                "Jeffrey Epstein did not kill himself"
+                            ],
+        "correct"       :   "No"
+    }
+
+],
+
+"go":[
+    {
+        "question"      :   "Q1: Do you think we had the patience to make a quiz for every language?",
+        
+        "choices"       :   [
+                                "Yes",
+                                "No",
+                                "Maybe",
+                                "Jeffrey Epstein did not kill himself"
+                            ],
+        "correct"       :   "No"
+    }
+
+],
+
+"scala":[
+    {
+        "question"      :   "Q1: Do you think we had the patience to make a quiz for every language?",
+        
+        "choices"       :   [
+                                "Yes",
+                                "No",
+                                "Maybe",
+                                "Jeffrey Epstein did not kill himself"
+                            ],
+        "correct"       :   "No"
+    }
+
+],
+
+"java":[
+    {
+        "question"      :   "Q1: Do you think we had the patience to make a quiz for every language?",
+        
+        "choices"       :   [
+                                "Yes",
+                                "No",
+                                "Maybe",
+                                "Jeffrey Epstein did not kill himself"
+                            ],
+        "correct"       :   "No"
+    }
+
+],
+
+"c":[
+    {
+        "question"      :   "Q1:  An exception is __?",
+        
+        "choices"       :   [
+                                "Run Time Error",
+                                "Logical Error",
+                                "Compiler Error",
+                                "None of the Above"
+                            ],
+        "correct"       :   "Run Time Error"
     },
     {
-        "question"      :   "Q2: Who is on the two dollar bill?",
+        "question"      :   "Q2: Choose the correct order of evaluation,",
         
         "choices"       :   [
-                                "Thomas Jefferson",
-                                "Dwight D. Eisenhower",
-                                "Benjamin Franklin",
-                                "Abraham Lincoln"
+                                "Relational>Arthematic>Logical>Assignment",
+                                "Arthematic>Relational>Logical>Assignment",
+                                "Relational>Logical>Arthematic>Assignment",
+                                "Assignment>Relational>Logical>Arthematic>"
                             ],
-        "correct"       :   "Thomas Jefferson",
-        "explanation"   :   "The two dollar bill is seldom seen in circulation. As a result, some businesses are confused when presented with the note."
+        "correct"       :   "Arthematic>Relational>Logical>Assignment"
     },
     {
-        "question"      :   "Q3: What event began on April 12, 1861?",
+        "question"      :   "Q3: What type of Language is C?",
         
         "choices"       :   [
-                                "First manned flight",
-                                "California became a state",
-                                "American Civil War began",
-                                "Declaration of Independence"
+                                "Interpreted",
+                                "Hybrid",
+                                "None of the Above",
+                                "Compliled"
                             ],
-        "correct"       :   "American Civil War began",
-        "explanation"   :   "South Carolina came under attack when Confederate soldiers attacked Fort Sumter. The war lasted until April 9th 1865."
+        "correct"       :   "Compliled"
+    },
+    {
+        "question"      :   "Q4: Identify the C compiler of UNIX.??",
+        
+        "choices"       :   [
+                                "cc",
+                                "borland",
+                                "gcc",
+                                "gpp"
+                            ],
+        "correct"       :   "gcc"
+    },
+    {
+        "question"      :   "Q5: What do you mean by “int (*ptr)[10]”?",
+        
+        "choices"       :   [
+                                "ptr is an array of pointersof to 10 integers",
+                                "ptr is pointer to array of 10 integers",
+                                "ptr is an array of 10 integers ",
+                                "None of the Above"
+                            ],
+        "correct"       :   "ptr is pointer to array of 10 integers"
+    }
+
+],
+
+"python":[
+    {
+        "question"      :   "What is a correct syntax to output \"Hello World\" in Python?",
+        
+        "choices"       :   [
+                                "p(\"Hello World\")",
+                                "echo \"Hello World\"",
+                                "echo(\"Hello World\");",
+                                "print(\"Hello World\")"
+                            ],
+        "correct"       :   "print(\"Hello World\")"
+    },
+    {
+        "question"      :   "Q2: How do you insert COMMENTS in Python code?",
+        
+        "choices"       :   [
+                                "/*this is a comment*/",
+                                "#this is a comment",
+                                "//this is a comment",
+                                "--this is a comment"
+                            ],
+        "correct"       :   "#this is a comment"
+    },
+    {
+        "question"      :   "Q3: Which one is NOT a legal variable name?",
+        
+        "choices"       :   [
+                                "my_var",
+                                "Myvar",
+                                "_myvar",
+                                "my-var"
+                            ],
+        "correct"       :   "my-var"
+    },
+    {
+        "question"      :   "Q4: What is the correct syntax to output the type of a variable or object in Python?",
+        
+        "choices"       :   [
+                                "print(typeof x)",
+                                "print(type(x))",
+                                "print(typeOf(x))",
+                                "print(typeof(x))"
+                            ],
+        "correct"       :   "print(type(x))"
+    },
+    {
+        "question"      :   "Q5: Which method can be used to remove any whitespace from both the beginning and the end of a string?",
+        
+        "choices"       :   [
+                                "strip",
+                                "trim()",
+                                "len() ",
+                                "ptrim()"
+                            ],
+        "correct"       :   "trim()"
+    }
+
+],
+
+"js":[
+    {
+        "question"      :   "Inside which HTML element do we put the JavaScript?",
+        
+        "choices"       :   [
+                                "<javascript>",
+                                "<js>",
+                                "<script>",
+                                "<scripting>"
+                            ],
+        "correct"       :   "<script>"
+    },
+    {
+        "question"      :   "Q2: How do you write \"Hello World\" in an alert box?",
+        
+        "choices"       :   [
+                                "alertBox(Hello world);",
+                                "msgbox(Hello World);",
+                                "alert(Hello World);",
+                                "msg(Hello World);"
+                            ],
+        "correct"       :   "alert(Hello World);"
+    },
+    {
+        "question"      :   "Q3: How do you create a function in JavaScript?",
+        
+        "choices"       :   [
+                                "function:func()",
+                                "function func()",
+                                "function =func()",
+                                "function:=func()"
+                            ],
+        "correct"       :   "function func()"
+    },
+    {
+        "question"      :   "Q4: How to write an IF statement in JavaScript?",
+        
+        "choices"       :   [
+                                "if i=5",
+                                "if i==5 then",
+                                "if i-5 then",
+                                "if(i==5)"
+                            ],
+        "correct"       :   "if(i==5)"
+    },
+    {
+        "question"      :   "Q5: What is the correct way to write a JavaScript array?",
+        
+        "choices"       :   [
+                                " var colors = [\"red\", \"green\", \"blue\"]",
+                                " var colors = 1 = (\"red\"), 2 = (\"green\"), 3 = (\"blue\")",
+                                " var colors = \"red\", \"green\", \"blue\"",
+                                " var colors = (1:\"red\", 2:\"green\", 3:\"blue\")"
+                            ],
+        "correct"       :   " var colors = [\"red\", \"green\", \"blue\"]"
     }
 
 ]
+
 }

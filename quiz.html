@@ -198,9 +198,10 @@
                     setupButtons();
                 }
             }
-            
+            var payLoad ={'quiz':lang};
             $.ajax({
-             type : 'GET',
+             type : 'POST',
+             data:   payLoad,
              url : '/api/v1/get_questions',
              success: function(response){
                 quiz=response;
